@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: mstest
+  cloud:
+    consul:
+      discovery:
+        register: false
+        aclToken: devToken
+        registerHealthCheck: false
+  jmx:
+    enabled: false
+    default-domain: ${spring.application.name}
+
+server:
+  port: 8444
+  ssl:
+    key-store: classpath:MSKeyStore.p12
+    key-store-password: changeit
+    keyStoreType: JKS
+    keyAlias: 1
+  contextPath: /integrationTest/1.0

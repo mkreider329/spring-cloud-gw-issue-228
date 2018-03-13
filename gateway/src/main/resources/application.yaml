@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        ssl:
+          useInsecureTrustManager: true
+      routes:
+      - id: ms_test
+        uri: https://localhost:8444
+        order: 10000
+        predicates:
+        - Path=/integrationTest/**
+        filters:

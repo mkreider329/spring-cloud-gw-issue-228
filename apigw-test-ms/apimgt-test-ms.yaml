@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: List
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: apimgt-test-ms
+  spec:
+    type: NodePort
+    ports:
+    - name: http
+      nodePort: 30080
+      port: 8080
+      targetPort: 8080
+    - name: https
+      port: 8443
+      targetPort: 8443
+    selector:
+      project: apimgt-test-ms
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    name: apimgt-test-ms
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        project: apimgt-test-ms
+    template:
+      metadata:
+        labels:
+          project: apimgt-test-ms
+      spec:
+        containers:
+        - image: illin5225.corp.amdocs.com:5000/apimgt-test-ms:1.0.0-SNAPSHOT
+          imagePullPolicy: Always
+          name: apimgt-test-ms
+          ports:
+          - containerPort: 8080
+            protocol: "TCP"
+          securityContext:
+            privileged: false
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              cpu: 100m
+        imagePullSecrets:
+          - name: nexus-pull-secret

@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: apigw-test-ms
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: apigw-test-ms
+    spec:
+      containers:
+      - name: apigw-test-ms
+        image: "illin5225.corp.amdocs.com:5000/apigw-test-ms:1.5.0-SNAPSHOT"
+        imagePullPolicy: Always
+        ports:
+        -
+          containerPort: 8081
+          protocol: "TCP"
+        -
+          containerPort: 8444
+          protocol: "TCP"
+        env:
+        -
+          name: KUBERNETES_NAMESPACE
+          value: "default"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "200m"
+          limits:
+            memory: "2Gi"
+            cpu: "1"
+      imagePullSecrets:
+      - name: "nexus-illin5225-pull-secret"
