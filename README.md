@@ -16,7 +16,7 @@ java -jar target/apigw-test-ms-exec.jar
 ## From terminal 2 (Spring Cloud GW with route to MS above)
 ```bash
 cd gateway
-jar java -jar target/gateway-0.0.1-SNAPSHOT.jar
+java -jar target/gateway-0.0.1-SNAPSHOT.jar
 ```
 
 ## From terminal 3 (Test Client)
