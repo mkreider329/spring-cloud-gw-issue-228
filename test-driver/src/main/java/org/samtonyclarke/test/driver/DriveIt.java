@@ -13,8 +13,8 @@ public class DriveIt
 {
     public static void main(String args[]) throws InterruptedException
     {
-        System.out.println("mkreider start test");
-        Flux<Integer> intFlux = Flux.range(1, args[0]);       
+        System.out.println("mkreider start test " + Integer.parseInt(args[0]));
+        Flux<Integer> intFlux = Flux.range(1, Integer.parseInt(args[0]));       
         intFlux.parallel().subscribe(i -> callOnce());
         System.out.println("mkreider end test");
     }
